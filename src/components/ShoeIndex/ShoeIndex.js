@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { WEIGHTS } from '../../constants';
+import { WEIGHTS, QUERIES } from '../../constants';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Select from '../Select';
@@ -10,11 +10,12 @@ import ShoeSidebar from '../ShoeSidebar';
 import ShoeGrid from '../ShoeGrid';
 
 const ShoeIndex = ({ sortId, setSortId }) => {
+  const title = "Running";
   return (
     <Wrapper>
       <MainColumn>
         <Header>
-          <Title>Running</Title>
+          <Title>{title}</Title>
           <Select
             label="Sort"
             value={sortId}
@@ -35,7 +36,9 @@ const ShoeIndex = ({ sortId, setSortId }) => {
             Shoes
           </Breadcrumbs.Crumb>
         </Breadcrumbs>
-        <Spacer size={42} />
+        <SpaceBlanket>
+          <Spacer size={42} />
+        </SpaceBlanket>
         <ShoeSidebar />
       </LeftColumn>
     </Wrapper>
@@ -47,14 +50,29 @@ const Wrapper = styled.div`
   flex-direction: row-reverse;
   align-items: baseline;
   gap: 32px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    flex-direction: column-reverse;
+    gap: revert;
+  }
 `;
 
 const LeftColumn = styled.div`
   flex-basis: 248px;
+  @media ${QUERIES.tabletAndSmaller} {
+    flex-basis: revert;
+  }
 `;
 
 const MainColumn = styled.div`
   flex: 1;
+
+`;
+
+const SpaceBlanket = styled.div`
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
+  }
 `;
 
 const Header = styled.header`
